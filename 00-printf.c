@@ -21,7 +21,7 @@ int _printf(const char *format, ...)
 	{
 		if (*(format + i) != *str)
 		{
-			_putchar((char) format[i]); }
+			write(1, (format + i), 1); }
 		else if (*(format + i) == *str && *(format + i + 1) == *(str + 1))
 		{
 			s = va_arg(args, char *);
@@ -31,19 +31,19 @@ int _printf(const char *format, ...)
 				if (s != NULL)
 				{
 					c = (char) *(s + n);
-					_putchar(c); }
+					write(1, &c, 1); }
 			} ++i; }
 		else if (*(format + i) == *ctr && *(format + i + 1) == *(ctr + 1))
 		{
 			c = (char) va_arg(args, int);
-			_putchar(c);
+			write(1, &c, 1);
 			++i; }
 		else if ((*(format + i) == *ctr && *(format + i + 1) == *ctr))
 		{
-			_putchar('%');
+			write(1, ctr, 1);
 			++i; }
 		else if (*(format + i) == '%' && (*(format + i + 1) != *(str + 1) || *(format + i + 1) != *(ctr + 1)))
-			_putchar('%');
+			write(1, ctr, 1);
 		++i; }
 	va_end(args);
 	return (1);
